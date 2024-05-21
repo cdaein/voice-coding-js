@@ -1,24 +1,31 @@
-import "./App.css";
-
-import { useState } from "react";
+import Ssam from "ssam-react";
+import type { Sketch, SketchSettings } from "ssam";
+import { sketch, settings } from "./sketches/sketch-ssam";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="App">
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <div style={{ flex: "1 1 50%", maxWidth: "50%" }}>
+        {/* REVIEW: assertion due to type error: it's a bit annoying to mix ts & js files */}
+        <Ssam
+          sketch={sketch as Sketch<"2d">}
+          settings={settings as SketchSettings}
+        />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div
+        style={{
+          flex: "1 1 50%",
+        }}
+      >
+        <code>source code goes here</code>
+      </div>
     </div>
   );
 }
